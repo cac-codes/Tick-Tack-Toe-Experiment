@@ -16,7 +16,7 @@ var winnerType = {
     tie: "tie"
 };
 
-
+// when combined with the cell you click on
 var winningCombinations = {
     0: [[1,2],[3,6],[4,8]],
     1: [[0,2],[4,7]],
@@ -44,7 +44,7 @@ var newGameBtn = document.querySelector('#new-game-button')
 
 ///calculate winner///
 
-
+///check winning range of the cell clicked//if 0 clicked check arrays of first [1][2][4] and then second option [2][6][8] in the array
 var calculateWinner = function(chosenIndex){
     var winningranges = winningCombinations[chosenIndex];
 
@@ -55,6 +55,7 @@ var calculateWinner = function(chosenIndex){
 
         if(currentEntry === firstOption && firstOption === secondOption){
          winningPlayer = currentEntry;
+         //Highlight the winning combination
          winningCombination= [chosenIndex, [winningranges[index][0]], [winningranges[index][1]]]
          return true;
         }
