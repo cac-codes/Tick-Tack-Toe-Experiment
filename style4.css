@@ -1,0 +1,272 @@
+/* cube */
+
+
+body {
+    background-color: black;
+    align-items: center;
+    display: grid;
+    justify-content: center;
+}
+.canvas {
+    width: 1000px;
+    height: 1000px;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.stage {
+    width: 600px;
+    height: 600px;
+    perspective: 1600px;
+    perspective-origin: 20% -900px;
+  }
+  
+figure {
+    display: block;
+    position: absolute;
+    border: 2px solid black;
+  }
+
+
+.cube {
+    transform-style: preserve-3d;
+    transform: rotateY(30deg);
+    display: grid;
+  }
+
+.front {
+    width: 450px;
+    height: 100px;
+    transform: translateZ(-215px) translateX(-5px) translateY(70px);
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    background-color: purple;
+    opacity: .5;
+    animation: blinkingBackground 12s infinite;
+    
+  }
+
+  .back {
+    width: 450px;
+    height: 100px;
+    transform: translateZ(230px) translateX(-5px) translateY(70px);
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    background-color:red;
+    opacity: .5;
+    animation: blinkingBackground 10s infinite;
+    
+  }
+   
+.top {
+    width: 450px;
+    height: 450px;
+    transform: rotateX(90deg) translateZ(150px);
+    background-color:blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: blinkingBackground 20s infinite;
+
+    
+    
+}
+.bottom {
+    width: 450px;
+    height: 450px;
+    transform: rotateX(90deg) translateZ(50px);
+    background-color:green;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: blinkingBackground 15s infinite;
+}
+
+
+.left {
+    width: 450px;
+    height: 100px;
+    transform: rotateY(-90deg) translateZ(225px) translateY(80px);
+    background-color: blue;
+    opacity: .2;
+    pointer-events: none;
+    animation: blinkingBackground 12s infinite;
+} 
+ .right {
+    width: 450px;
+    height: 100px;
+    transform: rotateY(90deg) translateZ(220px) translateY(70px);
+    background-color:orange;
+    opacity: .5;
+    pointer-events: none;
+    animation: blinkingBackground 10s infinite;
+}
+
+
+
+
+
+
+/* actual game */
+
+
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+
+h1 {
+    text-align: center;
+    color:grey;
+    padding: 1vmin;   
+}
+
+
+#game {
+    display: grid;
+    justify-content: center;
+    padding: 20px;
+    background-color: indigo;
+    height: 400px;
+    width: 400px;   
+    animation: blinkingBackground 12s infinite;
+}
+
+#board {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 20px;
+    margin: 2px;
+    
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    font-size: 5rem;
+    font-weight: bold;
+    color: blue;
+    background-color: brown;
+    animation: blinkingCells 30s infinite;
+}
+
+
+@keyframes blinkingCells{
+    0%		{ background-color: red;}
+    25%		{ background-color: green}
+    50%		{ background-color: purple}
+    75%		{ background-color: blue;}
+    100%	{ background-color: orange;}
+}
+
+
+.cell:active, .cell:hover {
+    cursor: pointer;
+    color: blanchedalmond;
+    background-color: rgb(215, 108, 108);
+}
+
+.cell.winner, .cellB.winner{
+
+background-color: red;
+color: royalblue;
+animation: blinkingBackground 2s infinite;
+}
+
+@keyframes blinkingBackground{
+    0%		{ background-color: red;}
+    25%		{ background-color: green}
+    50%		{ background-color: purple}
+    75%		{ background-color: blue;}
+    100%	{ background-color: orange;}
+}
+
+.cell-text, .cellM-text, .cellB-text {
+    opacity: 0;
+    height: 10;
+    width: 10;
+}
+    
+
+.cell-text.populated, .cellM-text.populated, .cellB-text.populated {
+    opacity: 1;
+    width: 10vmn;
+    height: 10vmn;
+    color: darkblue;
+    animation: blinkingCellText 30s infinite;
+}
+
+@keyframes blinkingCellText{
+    0%		{ color: red;}
+    25%		{ color: green}
+    50%		{ color: purple}
+    75%		{ color: blue;}
+    100%	{ color: orange;}
+}
+
+
+#screen-overlay {
+    display: none;
+    justify-content: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+#game-result-screen{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+#result-container {
+    display: flex;
+}
+
+#winner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 4vmin;
+    width: 20vmin;
+    height: 8vmin;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: blanchedalmond;
+}
+
+#new-game-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 2vmin;
+}
+
+#new-game-container > button {
+    font-size: 1rem;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 30px;
+}
+
+#new-game-container > button:hover,
+#new-game-container > button:active {
+    color: black;
+    cursor: pointer;
+    background-color: rgb(7, 27, 245);
+}
+
